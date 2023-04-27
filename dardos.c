@@ -36,6 +36,7 @@ int main()
     char Jugadores[9][20];
     int Edades[9];
     int Puntajes[9] = {0,0,0,0,0,0,0,0,0};
+
     for (int i = 0; i < 9; i++){
     char nombre[20];
     printf("Ingrese el nombre del jugador %d\n",i+1);
