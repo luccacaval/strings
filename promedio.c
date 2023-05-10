@@ -27,7 +27,7 @@ int main(void) {
     count++;
   }
 
-// Inicializar las variables para calcular los promedios
+// Inicializar las variables para calcular los promedios y controlar los cambios de matria y legajo
 float avg_sub = 0;
 float avg_id = 0;
 int avg_sub_count = 0;
@@ -39,7 +39,7 @@ strcpy(prev_sub, registers[0].subject);
   for (int i = 0; i < count; i++) {
     // Cambio de materia 
     if (strcmp(prev_sub, registers[i].subject)){
-      // Calcular el ultimo promedio de la materia y reiniciar las variables pertinentes
+      // Calcular el ultimo promedio por legajo de la materia y reiniciar las variables pertinentes
       avg_id = avg_id / marks_count_id;
       printf("Promedio del legajo %d = %.2f\n", prev_id, avg_id);
       avg_sub += avg_id;
@@ -55,19 +55,25 @@ strcpy(prev_sub, registers[0].subject);
       strcpy(prev_sub, registers[i].subject);
       avg_id += registers[i].mark;
       marks_count_id++;
+      // Cambio de alumno
     } else if (prev_id != registers[i].id) {
+      // Calcular el promedio del alumno
       avg_id = avg_id / marks_count_id;
       printf("Promedio del legajo %d = %.2f\n", prev_id, avg_id);
+      // Sumar el promedio del alumno para el calculo del promedio de toda la materaq 
       avg_sub += avg_id;
       avg_sub_count++;
+      // Reiniciar las variables para el calculo del promedio por alumno
       avg_id = 0;
       marks_count_id = 0;
+      // Comenzar el calculo del proximo promedio por legajo y actualizar las variables de control
       strcpy(prev_sub, registers[i].subject);
       prev_id = registers[i].id;
       avg_id += registers[i].mark;
       marks_count_id++;
     } 
     else{
+    // Sumar la calificacion para el calculo del promedio y actualizar las variables de control 
     strcpy(prev_sub, registers[i].subject);
     prev_id = registers[i].id;
     avg_id += registers[i].mark;
